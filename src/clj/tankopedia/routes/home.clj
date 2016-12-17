@@ -34,4 +34,7 @@
   (GET "/tank/:id" [id] (get-tank-by-id id))
   (GET "/users" [] (userController/get-users))
   (GET "/registration" [] (userController/registration-page nil))
-  (POST "/registration" [& params] (userController/registration-post params))         )
+  (POST "/registration" [& params] (userController/registration-post params))
+  (GET "/signin" [] (userController/signin-page nil))
+  (POST "/signin" [& params] (userController/signin params))
+  (POST "/signout" [] (userController/signout))  )

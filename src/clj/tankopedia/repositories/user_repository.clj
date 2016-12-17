@@ -29,7 +29,7 @@
   (add [this model]
     (jdbc/insert! db-spec "dbo.[user]" model))
 
-  (delete [this id] (jdbc/delete! db-spec :user ["u_id = ?" id]))
+  (delete [this id] (jdbc/delete! db-spec "dbo.[user]" ["u_id = ?" id]))
 
   UserRepository
 

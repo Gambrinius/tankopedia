@@ -36,7 +36,7 @@
     </schema>
     <schema id="11" parent="9" name="dbo">
       <ObjectId>1</ObjectId>
-      <IntrospectionTimestamp>2016-12-16.01:30:39.103</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2016-12-17.17:00:36.680</IntrospectionTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -157,7 +157,7 @@
     <table id="39" parent="11" name="user">
       <ObjectId>1573580644</ObjectId>
       <CreatedTimestamp>2015-11-30.13:56:44.393</CreatedTimestamp>
-      <ModifiedTimestamp>2015-12-15.21:54:32.447</ModifiedTimestamp>
+      <ModifiedTimestamp>2016-12-17.16:59:06.570</ModifiedTimestamp>
     </table>
     <table id="40" parent="11" name="weapon">
       <ObjectId>1122103038</ObjectId>
@@ -888,7 +888,7 @@
     </column>
     <column id="155" parent="39" name="u_password">
       <Position>4</Position>
-      <DataType>nvarchar(50)|0</DataType>
+      <DataType>nvarchar(max)|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="156" parent="39" name="u_role">

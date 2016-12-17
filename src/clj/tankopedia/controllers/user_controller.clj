@@ -37,7 +37,7 @@
 (defn create-user [login password name] (let [salt (str 123456789)
                                          hash-password (hashers/derive password {:alg :pbkdf2+sha256 :salt salt})]
                                      (baseRepository/add userRepository/userRepositoryComponent
-                                                         {:u_login login, :u_name name, :u_password password, :u_role 2})))
+                                                         {:u_login login, :u_name name, :u_password hash-password, :u_role 2})))
 
 (defn registration-post [user]
   (println user)
@@ -55,4 +55,24 @@
     )
 
   (layout/render
-    "home.html"))
+    "home.html" {:message "Successful registration"}))
+
+(defn signin-page [messages]
+  (layout/render
+    "singin.html" {:messages messages}))
+
+(defn signin [user]
+  (let [login (:login user)
+        password (:password user)]
+      (let [salt (str 123456789)
+            user (userRepository/find-by-login userRepository/userRepositoryComponent login)
+            hash-pass-db (:u_password user)
+            hash-pass (hashers/encrypt password {:alg :pbkdf2+sha256 :salt salt})]
+        (if (and hash-pass hash-pass-db (= hash-pass hash-pass-db))
+          (layout/render
+            "home.html" {:message "Successful Sign in ..."})
+          (println "password doesn't match" (:u_password user) hash-pass)))))
+
+(defn signout []
+  (layout/render
+    "home.html" {:message "Not working yet..."}))
