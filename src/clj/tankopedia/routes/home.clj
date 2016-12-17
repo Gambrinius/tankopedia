@@ -1,13 +1,13 @@
 (ns tankopedia.routes.home
   (:require [tankopedia.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
+            [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :as response]
             [clojure.java.io :as io]
             [tankopedia.db.queries :as db]
+            [tankopedia.repositories.base_repository :as baseRepository]
             [tankopedia.repositories.tank_repository :as tankRepository]
-            [tankopedia.services.tank_service]
             [tankopedia.models.model :as model]
-            [tankopedia.repositories.base_repository :as baseRepository]))
+            [tankopedia.controllers.user_controller :as userController]))
 
 (defn home-page []
   (layout/render
@@ -23,11 +23,15 @@
 
 (defn get-tanks []
   (let [tanks-list (baseRepository/find-all tankRepository/tankRepositoryComponent )]
-  (layout/render
-    "tanks.html" {:tanks tanks-list})))
+    (layout/render
+      "tanks.html" {:tanks tanks-list})))
+
 
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
   (GET "/tanks" [] (get-tanks))
-  (GET "/tank/:id" [id] (get-tank-by-id id)))
+  (GET "/tank/:id" [id] (get-tank-by-id id))
+  (GET "/users" [] (userController/get-users))
+  (GET "/registration" [] (userController/registration-page nil))
+  (POST "/registration" [& params] (userController/registration-post params))         )

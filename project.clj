@@ -3,8 +3,10 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
 
-  :dependencies [[bouncer "1.0.0"]                          ;validation DSL
-                 [com.h2database/h2 "1.4.192"]
+  :dependencies [[bouncer "1.0.0"] ;validation DSL
+                 [buddy "1.1.0"]
+                 [buddy/buddy-auth "1.2.0"]
+                 [buddy/buddy-hashers "1.0.0"]
                  [compojure "1.5.1"]                        ;small routing library for Ring
                  [conman "0.6.2"]                           ;database connection management and SQL query generation library
                  [cprop "0.1.9"]
