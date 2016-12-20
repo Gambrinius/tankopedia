@@ -14,16 +14,21 @@
 
 (defn render
   "renders the HTML template located relative to resources/templates"
-  [template & [params]]
-  (content-type
+  [request, template & [params]]
+  (let [
+        id (:identity (:session request))
+        authorised (not (nil? id))
+        name (:name (:session request))]
+    (content-type
     (ok
       (parser/render-file
         template
         (assoc params
           :page template
           :csrf-token *anti-forgery-token*
-          :servlet-context *app-context*)))
-    "text/html; charset=utf-8"))
+          :servlet-context *app-context*
+          :user {:id id :name name :authorised authorised})))
+    "text/html; charset=utf-8")))
 
 (defn error-page
   "error-details should be a map containing the following keys:

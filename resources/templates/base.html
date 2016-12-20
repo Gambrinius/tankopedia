@@ -59,6 +59,19 @@
                       sign in
                       </a>
                   </li>
+                  {% if user.authorised %}
+                  <li class="nav-item">
+                      <form action="/signout" id="logoutForm" method="post" class="navbar-right">
+                          <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">sign out</a>
+                      </form>
+                  </li>
+
+                  <li class="nav-item">
+                      <span class="nav-link">
+                          {{user.name}}
+                      </span>
+                  </li>
+                  {% endif %}
               </ul>
           </div>
       </nav>

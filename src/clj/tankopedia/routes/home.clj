@@ -9,12 +9,16 @@
             [tankopedia.models.model :as model]
             [tankopedia.controllers.user_controller :as userController]))
 
-(defn home-page []
+(defn home-page [request]
+  (if (not= request nil)
+    (println (request :session))
+    (println nil)
+    )
   (layout/render
-    "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+    request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
-(defn about-page []
-  (layout/render "about.html"))
+(defn about-page [request]
+  (layout/render request "about.html"))
 
 (defn get-tank-by-id [id]
   (let [tank-item (baseRepository/find-by-id tankRepository/tankRepositoryComponent id)]
@@ -28,13 +32,15 @@
 
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
-  (GET "/about" [] (about-page))
+  (GET "/" [:as request] (home-page request))
+  (GET "/home" [:as request] (home-page request))
+  (GET "/about" [:as request] (about-page request))
   (GET "/tanks" [] (get-tanks))
   (GET "/tank/:id" [id] (get-tank-by-id id))
   (GET "/users" [] (userController/get-users))
-  (GET "/registration" [] (userController/registration-page nil))
+  (GET "/registration" [] (userController/registration-page nil nil))
   (POST "/registration" [& params] (userController/registration-post params))
-  (GET "/signin" [] (userController/signin-page nil))
+  (GET "/signin" [] (userController/signin-page nil nil))
   (POST "/signin" [& params] (userController/signin params))
-  (POST "/signout" [] (userController/signout))  )
+  (POST "/signout" [:as request] (userController/signout request))
+  )
