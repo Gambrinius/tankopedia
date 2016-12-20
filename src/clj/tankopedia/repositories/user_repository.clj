@@ -36,7 +36,8 @@
   (find-by-login [this login]
     (let [item (first (jdbc/query db-spec ["SELECT u_id, u_login, u_name, u_password, u_role FROM dbo.[user]
                                             WHERE u_login = ?" login]))]
-      (model/->User (item :u_id) (item :u_login) (item :u_name) (item :u_password) (item :u_role))))
+      (if (not= item nil)
+      (model/->User (item :u_id) (item :u_login) (item :u_name) (item :u_password) (item :u_role)))))
 
   (find-by-login-and-hash [this login hash]
     (jdbc/query db-spec ["SELECT u_id, u_login, u_name, u_password, u_role FROM dbo.[user]

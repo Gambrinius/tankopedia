@@ -1,8 +1,32 @@
 html,
 body {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding-bottom: 30px;
 }
+
+.bigword {
+  word-break: break-all;
+  white-space: pre-line;
+  padding: 10px;
+}
+
+.field-validation-error {
+  color: #f00;
+}
+
+.input-validation-error {
+  border: 1px solid #f00;
+  background-color: #fee;
+}
+
+.message {
+  padding: 10px;
+}
+
+.rate-form {
+  display: inline-block;
+}
+
 .navbar {
   margin-bottom: 10px;
   border-radius: 0px;

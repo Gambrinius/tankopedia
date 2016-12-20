@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <form action="/registration" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
+    <h4>Create new account</h4>
     <hr/>
     {% if messages.success %}
-    <div class="form-group">
+    <div class="col-sm-8 form-group">
         <div class="col-sm-offset-2 col-sm-8 col-xs-10">
             <div class="bg-success message img-rounded"><h4>{{messages.success}}</h4></div>
         </div>
     </div>
     {% endif %}
-    <div class="form-group">
-        <div class="col-sm-2 col-xs-10 control-label">
-            <label for="login">Login*: </label>
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="login">Login: </label>
         </div>
         <div class="col-sm-8 col-xs-10">
             <input name="login" id="login" type="email" class="{% if messages.login %}input-validation-error{% endif %} form-control" placeholder="Login" >
@@ -22,9 +22,9 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-sm-2 col-xs-10 control-label">
-            <label for="password">Password*: </label>
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="password">Password: </label>
         </div>
         <div class="col-sm-8 col-xs-10">
             <input name="password" id="password" type="password" placeholder="Password" class="{% if messages.login %}input-validation-error{% endif %} form-control">
@@ -34,9 +34,9 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-sm-2 col-xs-10 control-label">
-            <label for="password2">Confirm Password*: </label>
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="password2">Confirm Password: </label>
         </div>
         <div class="col-sm-8 col-xs-10">
             <input name="password2" id="password2" type="password" placeholder="Confirm Password"  class="{% if messages.login %}input-validation-error{% endif %} form-control">
@@ -46,12 +46,15 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-sm-2 col-xs-10 control-label">
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
             <label for="name">Name: </label>
         </div>
         <div class="col-sm-8 col-xs-10">
             <input name="name" id="name" type="text" class="form-control" placeholder="Name" >
+            {% if messages.name %}
+            <span class="field-validation-error" data-valmsg-for="name" data-valmsg-replace="true">{{messages.name}}</span>
+            {% endif %}
         </div>
     </div>
 
