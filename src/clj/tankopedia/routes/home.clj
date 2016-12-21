@@ -7,15 +7,14 @@
             [tankopedia.repositories.base_repository :as baseRepository]
             [tankopedia.repositories.tank_repository :as tankRepository]
             [tankopedia.models.model :as model]
-            [tankopedia.controllers.user_controller :as userController]))
+            [tankopedia.controllers.user_controller :as userController]
+            [tankopedia.repositories.news_repository :as newsRepository]))
 
 (defn home-page [request]
-  (if (not= request nil)
-    (println (request :session))
-    (println nil)
-    )
+  (let [news (baseRepository/find-all  newsRepository/newsRepositoryComponent) ]
+    (println news)
   (layout/render
-    request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+    request "home.html" {:news news :docs (-> "docs/docs.md" io/resource slurp)})))
 
 (defn about-page [request]
   (layout/render request "about.html"))
@@ -37,10 +36,4 @@
   (GET "/about" [:as request] (about-page request))
   (GET "/tanks" [] (get-tanks))
   (GET "/tank/:id" [id] (get-tank-by-id id))
-  (GET "/users" [] (userController/get-users))
-  (GET "/registration" [] (userController/registration-page nil nil))
-  (POST "/registration" [& params] (userController/registration-post params))
-  (GET "/signin" [] (userController/signin-page nil nil))
-  (POST "/signin" [& params] (userController/signin params))
-  (POST "/signout" [:as request] (userController/signout request))
   )

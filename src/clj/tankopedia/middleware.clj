@@ -1,11 +1,15 @@
 (ns tankopedia.middleware
   (:require [tankopedia.env :refer [defaults]]
             [clojure.tools.logging :as log]
-            [tankopedia.layout :refer [*app-context* error-page]]
+            [tankopedia.layout :refer [*app-context* error-page *identity*]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.format :refer [wrap-restful-format]]
             [tankopedia.config :refer [env]]
+            [buddy.auth.accessrules :refer [restrict]]
+            [buddy.auth :refer [authenticated?]]
+            [buddy.auth.backends.session :refer [session-backend]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [ring.middleware.flash :refer [wrap-flash]]
             [immutant.web.middleware :refer [wrap-session]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]])
@@ -36,6 +40,32 @@
                      :title "Something very bad has happened!"
                      :message "We've dispatched a team of highly trained gnomes to take care of the problem."})))))
 
+(defn on-error [request response]
+  (error-page
+    {:status 403
+     :title (str "Access to " (:uri request) " is not authorized")}))
+
+(defn wrap-restricted [handler]
+  (println #'*identity*)
+  (restrict handler {:handler authenticated?
+                     :on-error on-error}))
+
+(defn authorized [request]
+  )
+
+(defn wrap-identity [handler]
+  (fn [request]
+    (binding [*identity* (get-in request [:session :identity])]
+      (println *identity*)
+      (handler request))))
+
+(defn wrap-auth [handler]
+  (let [backend (session-backend)]
+    (-> handler
+        wrap-identity
+        (wrap-authentication backend)
+        (wrap-authorization backend))))
+
 (defn wrap-csrf [handler]
   (wrap-anti-forgery
     handler
@@ -55,6 +85,7 @@
 
 (defn wrap-base [handler]
   (-> ((:middleware defaults) handler)
+      wrap-auth
       wrap-webjars
       wrap-flash
       (wrap-session {:cookie-attrs {:http-only true}})

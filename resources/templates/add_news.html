@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/add_news" method="post" class="form-horizontal">
+    <h4>Create News</h4>
+    <hr/>
+    {% if messages.success %}
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-offset-2 col-sm-8 col-xs-10">
+            <div class="bg-success message img-rounded"><h4>{{messages.success}}</h4></div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="title">Title: </label>
+        </div>
+        <div class="col-sm-8 col-xs-10">
+            <input name="title" id="title" type="text" class="{% if messages.title %}input-validation-error{% endif %} form-control" placeholder="Title" >
+            {% if messages.title %}
+            <span class="field-validation-error" data-valmsg-for="title" data-valmsg-replace="true">{{messages.title}}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="short">Short description: </label>
+        </div>
+        <div class="col-sm-8 col-xs-10">
+            <textarea name="short" cols="40" rows="3" id="short" placeholder="Short description" class="{% if messages.short %}input-validation-error{% endif %} form-control"></textarea>
+            {% if messages.short %}
+            <span class="field-validation-error" data-valmsg-for="short" data-valmsg-replace="true">{{messages.short}}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-sm-8 form-group">
+        <div class="col-sm-4 col-xs-10 control-label">
+            <label for="text">Text: </label>
+        </div>
+        <div class="col-sm-8 col-xs-10">
+            <textarea name="text" cols="100" rows="10" id="text"  class="{% if messages.short %}input-validation-error{% endif %} form-control" placeholder="Full text" ></textarea>
+            {% if messages.text %}
+            <span class="field-validation-error" data-valmsg-for="text" data-valmsg-replace="true">{{messages.text}}</span>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8 col-xs-10">
+            <input type="submit" class="btn btn-default" value="Add"/>
+        </div>
+    </div>
+</form>
+{% endblock %}
