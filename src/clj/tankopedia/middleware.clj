@@ -46,7 +46,6 @@
      :title (str "Access to " (:uri request) " is not authorized")}))
 
 (defn wrap-restricted [handler]
-  (println #'*identity*)
   (restrict handler {:handler authenticated?
                      :on-error on-error}))
 
@@ -56,7 +55,6 @@
 (defn wrap-identity [handler]
   (fn [request]
     (binding [*identity* (get-in request [:session :identity])]
-      (println *identity*)
       (handler request))))
 
 (defn wrap-auth [handler]

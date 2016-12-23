@@ -9,7 +9,8 @@
             [tankopedia.models.model :as model]
             [tankopedia.controllers.user_controller :as userController]
             [tankopedia.repositories.news_repository :as newsRepository]
-            [tankopedia.controllers.news_controller :as newsController]))
+            [tankopedia.controllers.news_controller :as newsController]
+            [tankopedia.dsl.dsl :as dsl]))
 
 (defn home-page [request]
   (newsController/get-latest-news request)
@@ -35,4 +36,6 @@
   (GET "/about" [:as request] (about-page request))
   (GET "/tanks" [] (get-tanks))
   (GET "/tank/:id" [id] (get-tank-by-id id))
+  (GET "/dsl" [:as request] (dsl/dsl-page request nil))
+  (POST "/dsl" [:as request] (dsl/dsl-page-post request))
   )

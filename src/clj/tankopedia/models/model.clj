@@ -13,6 +13,4 @@
 
 (defrecord News [n_id, n_title, n_short, n_text, n_creation, n_user_id])
 
-(defrecord News_Rating [nr_id, nr_value, nr_user_id, nr_news_id])
-
 (defrecord Comment [c_id, c_user_id, c_news_id, c_text, c_creation, c_user_name])

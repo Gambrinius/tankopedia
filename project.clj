@@ -3,7 +3,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
 
-  :dependencies [[bouncer "1.0.0"] ;validation DSL
+  :dependencies [[bouncer "1.0.0"]                          ;validation DSL
                  [buddy "1.1.0"]
                  [buddy/buddy-auth "1.2.0"]
                  [buddy/buddy-hashers "1.0.0"]
@@ -29,7 +29,7 @@
                  [ring/ring-defaults "0.2.1"]               ;abstracting the details of HTTP into a simple, unified API
                  [selmer "1.10.1"]
                  [org.clojure/java.jdbc "0.7.0-alpha1"]
-                 [sqljdbc4/sqljdbc4 "4.0"]]                         ;template system
+                 [sqljdbc4/sqljdbc4 "4.0"]]                                          ;template system
 
   :min-lein-version "2.0.0"
 

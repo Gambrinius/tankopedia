@@ -11,7 +11,7 @@
 
 
 (defrecord CacheRepositoryImpl [db-spec]
-    CacheRepository
+  CacheRepository
 
   (update-cache [this]
       (let [news-list (jdbc/query db-spec ["SELECT TOP 10 * FROM news ORDER BY n_creation DESC"])]

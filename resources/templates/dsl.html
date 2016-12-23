@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <form action="/dsl" method="post" class="form-horizontal">
+            {% if messages.ex %}
+                <h3 color="red"> {{messages.ex}} </h3>
+            {% endif %}
+            <div class="col-sm-8 col-xs-10">
+                <textarea name="command" cols="100" rows="1" id="command"  class="{% if messages.command %}input-validation-error{% endif %} form-control" placeholder="input command" ></textarea>
+                {% if messages.command %}
+                <span class="field-validation-error" data-valmsg-for="text" data-valmsg-replace="true">{{messages.command}}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8 col-xs-10">
+                    <input type="submit" class="btn btn-default" value="Execute command"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
