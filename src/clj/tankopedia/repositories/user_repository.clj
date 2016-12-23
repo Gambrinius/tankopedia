@@ -5,9 +5,6 @@
             [tankopedia.models.model :as model]
             [tankopedia.repositories.base_repository :as baseRepository]))
 
-
-
-
 (defprotocol UserRepository
   (find-by-login [this login])
   (find-by-login-and-hash [this login hash]))

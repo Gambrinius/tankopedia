@@ -15,4 +15,4 @@
 
 (defrecord News_Rating [nr_id, nr_value, nr_user_id, nr_news_id])
 
-(defrecord Comment [id, text, creation_date, news_id, user_id]) ; надо поменять
+(defrecord Comment [c_id, c_user_id, c_news_id, c_text, c_creation, c_user_name])

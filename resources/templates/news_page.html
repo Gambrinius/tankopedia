@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+            <div class="col-sm-8">
+                <h3>{{item.n_title}}</h3>
+            </div>
+            <div class="col-sm-4">
+                <p>{{item.n_creation}}</p>
+            </div>
+            <div class="col-sm-8">
+                <p>{{item.n_text}}</p>
+            </div>
+    </div>
+
+    <div class="col-sm-8">
+        <ul>
+            {% for comment in comments %}
+            <div class="col-sm-6">
+                <h3>{{comment.c_user_name}}</h3>
+            </div>
+            <div class="col-sm-6">
+                <p>{{comment.c_creation}}</p>
+            </div>
+            <div class="col-sm-10">
+                <p>{{comment.c_text}}</p>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if user.authentificated  %}
+    <form action="/news/{{item.n_id}}" method="post" class="form-horizontal">
+        <div class="col-sm-8 col-xs-10">
+            <textarea name="text" cols="100" rows="10" id="text"  class="{% if messages.text %}input-validation-error{% endif %} form-control" placeholder="Full text" ></textarea>
+            {% if messages.text %}
+                <span class="field-validation-error" data-valmsg-for="text" data-valmsg-replace="true">{{messages.text}}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8 col-xs-10">
+                <input type="submit" class="btn btn-default" value="Add comment"/>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}

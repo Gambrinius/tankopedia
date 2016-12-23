@@ -23,3 +23,4 @@
   (delete [this id] (jdbc/delete! db-spec :news ["n_id = ?" id])))
 
 (def newsRepositoryComponent (->NewsRepositoryImpl db/db-spec))
+
