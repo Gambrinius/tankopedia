@@ -36,7 +36,7 @@
     </schema>
     <schema id="11" parent="9" name="dbo">
       <ObjectId>1</ObjectId>
-      <IntrospectionTimestamp>2016-12-21.14:02:36.480</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2016-12-23.00:42:19.110</IntrospectionTimestamp>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -107,7 +107,7 @@
     <table id="29" parent="11" name="news">
       <ObjectId>1070626857</ObjectId>
       <CreatedTimestamp>2016-12-21.13:58:28.210</CreatedTimestamp>
-      <ModifiedTimestamp>2016-12-21.14:02:36.017</ModifiedTimestamp>
+      <ModifiedTimestamp>2016-12-23.00:42:18.440</ModifiedTimestamp>
     </table>
     <table id="30" parent="11" name="news_rating">
       <ObjectId>1390627997</ObjectId>
@@ -422,7 +422,7 @@
     </column>
     <column id="83" parent="29" name="n_short">
       <Position>3</Position>
-      <DataType>nvarchar(100)|0</DataType>
+      <DataType>nvarchar(300)|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="84" parent="29" name="n_text">

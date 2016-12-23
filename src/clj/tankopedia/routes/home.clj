@@ -8,13 +8,12 @@
             [tankopedia.repositories.tank_repository :as tankRepository]
             [tankopedia.models.model :as model]
             [tankopedia.controllers.user_controller :as userController]
-            [tankopedia.repositories.news_repository :as newsRepository]))
+            [tankopedia.repositories.news_repository :as newsRepository]
+            [tankopedia.controllers.news_controller :as newsController]))
 
 (defn home-page [request]
-  (let [news (baseRepository/find-all  newsRepository/newsRepositoryComponent) ]
-    (println news)
-  (layout/render
-    request "home.html" {:news news :docs (-> "docs/docs.md" io/resource slurp)})))
+  (newsController/get-latest-news request)
+  )
 
 (defn about-page [request]
   (layout/render request "about.html"))
