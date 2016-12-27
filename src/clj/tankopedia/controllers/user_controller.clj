@@ -58,7 +58,7 @@
     request "singin.html" {:messages messages}))
 
 (defn update-session [request id name]
-  (let [next-url (get-in request [:query-params :next] "/home")
+  (let [next-url (get-in request [:query-params :next] "/")
         session (:session request)
         updated-session (assoc session :identity id :name name)]
   (-> (redirect next-url)
@@ -83,5 +83,5 @@
         (signin-page nil (utils/fix-validation-messages validation-result)))))
 
 (defn signout [request]
-  (-> (redirect "/home")
+  (-> (redirect "/")
       (assoc :session {})))

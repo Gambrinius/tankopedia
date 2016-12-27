@@ -4,8 +4,9 @@
 
 (defrecord Role [r_id, r_role])
 
-(defrecord Tank [tank_id, tank_health, tank_name, tank_weight, tank_category, tank_level, tank_country,
-                 tank_premium, tank_price, tank_small_icon, tank_big_icon])
+(defrecord Tank [tank_id, tank_health, tank_name, tank_weight,  tank_level,
+                 tank_premium, tank_price, tank_small_icon, tank_big_icon,
+                 tank_category, tank_country])
 
 (defrecord Category [c_id, c_name, c_icon])
 

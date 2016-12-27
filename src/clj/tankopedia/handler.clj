@@ -4,6 +4,7 @@
             [tankopedia.routes.home :refer [home-routes]]
             [tankopedia.routes.user :refer [user-routes]]
             [tankopedia.routes.news :refer [news-routes]]
+            [tankopedia.routes.tank :refer [tank-routes]]
             [compojure.route :as route]
             [tankopedia.env :refer [defaults]]
             [mount.core :as mount]
@@ -19,10 +20,10 @@
         (wrap-routes middleware/wrap-formats))
     (-> #'user-routes
         (wrap-routes middleware/wrap-formats))
-    (-> #'news-routes                                       ;используется для добавления/изменения новостей
-        (wrap-routes middleware/wrap-formats)               ;(возможно только для авториз. польз.)
-        ;(wrap-routes middleware/wrap-restricted)
-        )
+    (-> #'news-routes
+        (wrap-routes middleware/wrap-formats))
+    (-> #'tank-routes
+        (wrap-routes middleware/wrap-formats))
     (route/not-found
       (:body
         (error-page {:status 404
